@@ -12,16 +12,16 @@ use App\Jobs\ProcessPodcast;
 ProcessPodcast::dispatch($pocast);
 ```
 
-When using Vapor, your application will use the AWS SQS service, which is already a first-party queue driver within Laravel. Vapor will automatically configure your deployed application's to use this queue driver by injecting the proper Laravel environment variables. You do not need to perform any additional configuration.
+When using Vapor, your application will use the AWS SQS service, which is already a first-party queue driver within Laravel. Vapor will automatically configure your deployed applications to use this queue driver by injecting the proper Laravel environment variables. You do not need to perform any additional configuration.
 
 :::danger Queued Job Time Limits
 
-Currently, serverless applications on AWS may only process a single request (web or queue) for a maximum of 15 minutes. If your queued jobs take longer than 15 minutes, you will need to either chunk your job's work into smaller pieces or consider another deployment solution for your application.
+Currently, serverless applications on AWS may only process a single request (web or queue) for a maximum of 15 minutes. If processing a queued job takes longer than 15 minutes, you will need to either chunk the job's work into smaller pieces or consider another deployment solution for your application.
 :::
 
 ## Queue Concurrency
 
-By default, Vapor will allow your queue to process jobs at max concurrency, which is typically 1,000 concurrent jobs executing at the same time. If you would like to reduce the maximum queue concurrency, you may define the `cli-concurrency` option in the environment's `vapor.yml` configuration:
+By default, Vapor wilul allow your queue to process jobs at max concrrency, which is typically 1,000 concurrent jobs executing at the same time. If you would like to reduce the maximum queue concurrency, you may define the `cli-concurrency` option in the environment's `vapor.yml` configuration:
 
 ```yaml
 id: 2
